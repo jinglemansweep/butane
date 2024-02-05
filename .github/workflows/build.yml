@@ -15,6 +15,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare Filesystem
+        run: |
+          mkdir -p .build
+
       - name: Create Butane YAML with Terraform
         run: |
           pushd ./terraform
@@ -23,7 +27,6 @@ jobs:
           echo "Applying Terraform..."
           terraform apply -auto-approve
           echo "Getting Terraform JSON outputs..."
-          mkdir -p ./.build
           for i in "plex" "swarm_manager" "swarm_worker"; do 
             echo "  ... ${i}"
             terraform output -raw ${i} > ../.build/${i}.json

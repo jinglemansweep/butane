@@ -1,0 +1,30 @@
+variant: flatcar
+version: 1.0.0
+
+storage:
+  disks:
+    - device: /dev/vdb
+      partitions:
+        - number: 1
+          label: mnt_data
+          resize: true
+          size_mib: 0
+
+  filesystems:
+    - path: /mnt/data
+      device: /dev/disk/by-partlabel/mnt_data
+      format: ext4
+      wipe_filesystem: true
+      label: mnt_data
+      with_mount_unit: true
+
+  links:
+    - path: /etc/systemd/system/multi-user.target.wants/docker.service
+      target: /usr/lib/systemd/system/docker.service
+      hard: false
+      overwrite: true
+
+systemd:
+  units:
+    - name: docker.service
+      enabled: true

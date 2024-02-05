@@ -1,0 +1,37 @@
+variant: flatcar
+version: 1.0.0
+
+storage:
+  files:
+    - path: /etc/systemd/system.conf.d/11-env-nfs.conf
+      mode: 0644
+      contents:
+        inline: |
+          [Manager]
+          DefaultEnvironment=FC_NFS_HOST=10.0.2.11
+
+systemd:
+  units:
+    - name: mnt-nfs-work.mount
+      enabled: true
+      contents: |
+        [Unit]
+        Before=remote-fs.target
+        [Mount]
+        What=${FC_NFS_HOST}:/volume1/cluster/work
+        Where=/mnt/nfs/work
+        Type=nfs
+        [Install]
+        WantedBy=remote-fs.target
+
+    - name: mnt-nfs-volumes.mount
+      enabled: true
+      contents: |
+        [Unit]
+        Before=remote-fs.target
+        [Mount]
+        What=${FC_NFS_HOST}:/volume1/cluster/docker/volumes
+        Where=/mnt/nfs/volumes
+        Type=nfs
+        [Install]
+        WantedBy=remote-fs.target

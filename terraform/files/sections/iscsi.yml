@@ -1,0 +1,30 @@
+variant: flatcar
+version: 1.0.0
+
+systemd:
+  units:
+    - name: iscsi.service
+      enabled: true
+
+    - name: iscsi-volume.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Mount iSCSI Volume
+        Wants=network-online.target
+        After=network-online.target iscsid.service
+        Requires=iscsid.service
+        ConditionEnvironment=FC_ISCSI_PORTAL
+        ConditionEnvironment=FC_ISCSI_TARGET
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStartPre=/bin/mkdir -p /mnt/iscsi
+        ExecStartPre=/sbin/iscsiadm -m discovery -t st -p ${FC_ISCSI_PORTAL}
+        ExecStartPre=-/sbin/iscsiadm -m node --targetname ${FC_ISCSI_TARGET} --portal ${FC_ISCSI_PORTAL} --logout
+        ExecStart=/sbin/iscsiadm -m node --targetname ${FC_ISCSI_TARGET} --portal ${FC_ISCSI_PORTAL} --login
+        ExecStart=/bin/sh -c "sleep 5 && /bin/mount /dev/disk/by-id/scsi-*-part1 /mnt/iscsi"
+        ExecStop=/bin/umount /mnt/iscsi
+        ExecStop=/sbin/iscsiadm -m node --targetname ${FC_ISCSI_TARGET} --portal ${FC_ISCSI_PORTAL} --logout
+        [Install]
+        WantedBy=multi-user.target

@@ -4,17 +4,30 @@ on:
 permissions:
   contents: write
 jobs:
-  build-and-deploy:
+  Build:
     concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build
+      - name: Create Butane YAML with Terraform
         run: |
-          mkdir -p .build
-          echo "HELLO" > .build/index.html
+          pushd ./terraform
+          echo "Initialising Terraform..."
+          terraform init
+          echo "Applying Terraform..."
+          terraform apply -auto-approve
+          echo "Getting Terraform JSON outputs..."
+          for i in "plex" "swarm_manager" "swarm_worker"; do 
+            echo "  ... ${i}"
+            terraform output -raw ${i} > ./build/${i}.json
+          done
+          popd
           
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4

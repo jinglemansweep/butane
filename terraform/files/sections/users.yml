@@ -1,0 +1,10 @@
+variant: flatcar
+version: 1.0.0
+
+passwd:
+  users:
+    - name: louis
+      ssh_authorized_keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAPME1Cu6epBXHCAI6pRjhuWC5HprHsqLlrokNRqdpcd/yKvP4KauPGKzZpshG9P/EUJ/ZYCh1diD4CUZgkzY54n2GuDmfxqsnhjkdI9g8Ceu1VsXTLwvW62BVDQgXaVBhds9rd+f+DTIEMqQvCnwkWSnMCPTY/+mi4PqireJgdQ18UXkSGjWtbDb+BgJB9BLI61Wx+eoKe8JMjJjoRhV1xxinS1XlghATh9onddaM6k1uVuLi8hQRYRqbrBwUQ21P+pLQbe6XJLdw65jnThSH/9BJ59ePqpWS+H43fzl9iAyyZFoBV9IVT+P4roEIAIIs1O4Kp02R09azbml8JkON louis@home
+      password_hash: "$6$4DcadFC0.wM$.3jy/J4hsDnP55ehJM2zTEWyCrrc.O7m3N2/j2Zohel8n1qQJM73mwmHFFOyuTbp8eZH4XReUyzE1EbyqXx/b."
+      groups: [sudo, docker]

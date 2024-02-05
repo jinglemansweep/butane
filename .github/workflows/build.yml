@@ -17,25 +17,32 @@ jobs:
 
       - name: Prepare Filesystem
         run: |
-          mkdir -p .build
+          mkdir -p ./.build
 
       - name: Create Butane YAML with Terraform
         run: |
           pushd ./terraform
+
           echo "Initialising Terraform..."
           terraform init
+          
           echo "Applying Terraform..."
           terraform apply -auto-approve
+          
           echo "Starting index page..."
           echo "<html><head><title>Butane</title><body><h1>Butane</h1><p>Deployed by Terraform</p><ul>" > ../.build/index.html
+          
           echo "Getting Terraform JSON outputs..."
+          
           for i in "plex" "swarm_manager" "swarm_worker"; do 
             echo "  ... ${i}"
             terraform output -raw ${i} > ../.build/${i}.json
             echo "<li><a href=\"${i}.json\">${i}</a></li>" >> ../.build/index.html
           done
+          
           echo "Closing index page..."
           echo "</ul></body></html>" >> ../.build/index.html
+          
           popd
           
       - name: Deploy

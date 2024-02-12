@@ -14,10 +14,20 @@ storage:
     - path: /mnt/data
       device: /dev/disk/by-partlabel/mnt_data
       format: ext4
-      wipe_filesystem: true
+      wipe_filesystem: false
       label: mnt_data
       with_mount_unit: true
 
+  files:
+    - path: /etc/docker/daemon.json
+      mode: 0644
+      contents:
+        inline: |
+          {
+            "metrics-addr" : "0.0.0.0:9323",
+            "experimental" : true
+          }
+          
   links:
     - path: /etc/systemd/system/multi-user.target.wants/docker.service
       target: /usr/lib/systemd/system/docker.service
@@ -28,3 +38,4 @@ systemd:
   units:
     - name: docker.service
       enabled: true
+

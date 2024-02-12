@@ -4,7 +4,6 @@ version: 1.0.0
 storage:
   disks:
     - device: /dev/vdb
-      wipe_table: true
 
   files:
     - path: /etc/systemd/system.conf.d/10-env-base.conf

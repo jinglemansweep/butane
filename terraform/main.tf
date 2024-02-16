@@ -44,6 +44,6 @@ data "ct_config" "hetzner" {
 
   snippets = [
     # Sectionss
-    file("files/sections/users.yml")
+    file("files/sections/users_test.yml")
   ]
 }

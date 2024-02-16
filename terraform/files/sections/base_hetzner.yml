@@ -1,0 +1,14 @@
+variant: flatcar
+version: 1.0.0
+
+storage:
+  disks:
+    - device: /dev/sdb
+
+  files:
+    - path: /etc/systemd/system.conf.d/10-env-base.conf
+      mode: 0644
+      contents:
+        inline: |
+          [Manager]
+          DefaultEnvironment=FC_TEST_VAR=hello-world

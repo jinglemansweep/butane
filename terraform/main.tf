@@ -36,3 +36,14 @@ data "ct_config" "plex" {
     file("files/sections/nfs.yml")
   ]
 }
+
+data "ct_config" "hetzner" {
+  content      = file("files/sections/base_hetzner.yml")
+  strict       = true
+  pretty_print = false
+
+  snippets = [
+    # Sectionss
+    file("files/sections/users.yml")
+  ]
+}

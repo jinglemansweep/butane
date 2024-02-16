@@ -9,3 +9,7 @@ output "swarm_worker" {
 output "plex" {
   value = data.ct_config.plex.rendered
 }
+
+output "hetzner" {
+  value = data.ct_config.hetzner.rendered
+}

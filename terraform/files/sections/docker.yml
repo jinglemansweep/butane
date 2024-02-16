@@ -2,21 +2,6 @@ variant: flatcar
 version: 1.0.0
 
 storage:
-  disks:
-    - device: /dev/vdb
-      partitions:
-        - number: 1
-          label: mnt_data
-          resize: true
-          size_mib: 0
-
-  filesystems:
-    - path: /mnt/data
-      device: /dev/disk/by-partlabel/mnt_data
-      format: ext4
-      wipe_filesystem: false
-      label: mnt_data
-      with_mount_unit: true
 
   files:
     - path: /etc/docker/daemon.json
@@ -35,7 +20,13 @@ storage:
       overwrite: true
 
 systemd:
+
   units:
     - name: docker.service
       enabled: true
 
+
+passwd:
+  users:
+    - name: louis
+      groups: [docker"]

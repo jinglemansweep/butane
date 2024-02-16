@@ -1,9 +1,10 @@
 data "ct_config" "swarm_manager" {
-  content      = file("files/sections/base.yml")
+  content      = file("files/sections/disk_vm.yml")
   strict       = true
   pretty_print = false
 
   snippets = [
+    file("files/sections/fs.yml"),
     # Sections
     file("files/sections/users.yml"),
     file("files/sections/docker.yml"),
@@ -12,11 +13,12 @@ data "ct_config" "swarm_manager" {
 }
 
 data "ct_config" "swarm_worker" {
-  content      = file("files/sections/base.yml")
+  content      = file("files/sections/disk_vm.yml")
   strict       = true
   pretty_print = false
 
   snippets = [
+    file("files/sections/fs.yml"),
     # Sections
     file("files/sections/users.yml"),
     file("files/sections/docker.yml"),
@@ -25,11 +27,12 @@ data "ct_config" "swarm_worker" {
 }
 
 data "ct_config" "plex" {
-  content      = file("files/sections/base.yml")
+  content      = file("files/sections/disk_vm.yml")
   strict       = true
   pretty_print = false
 
   snippets = [
+    file("files/sections/fs.yml"),
     # Sections
     file("files/sections/users.yml"),
     file("files/sections/docker.yml"),
@@ -38,12 +41,14 @@ data "ct_config" "plex" {
 }
 
 data "ct_config" "hetzner" {
-  content      = file("files/sections/base_hetzner.yml")
+  content      = file("files/sections/disk_sd.yml")
   strict       = true
   pretty_print = false
 
   snippets = [
+    file("files/sections/fs.yml"),
     # Sectionss
-    file("files/sections/users_test.yml")
+    file("files/sections/users.yml"),
+    file("files/sections/docker.yml"),
   ]
 }

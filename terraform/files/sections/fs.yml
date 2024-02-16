@@ -1,0 +1,12 @@
+variant: flatcar
+version: 1.0.0
+
+storage:
+
+  filesystems:
+    - path: /mnt/data
+      device: /dev/disk/by-partlabel/mnt_data
+      format: ext4
+      wipe_filesystem: false
+      label: mnt_data
+      with_mount_unit: true

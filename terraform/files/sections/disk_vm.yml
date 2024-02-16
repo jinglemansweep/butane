@@ -1,0 +1,11 @@
+variant: flatcar
+version: 1.0.0
+
+storage:
+  disks:
+    - device: /dev/vdb
+      partitions:
+        - number: 1
+          label: mnt_data
+          resize: true
+          size_mib: 0

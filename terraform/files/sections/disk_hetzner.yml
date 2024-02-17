@@ -1,0 +1,12 @@
+variant: flatcar
+version: 1.0.0
+
+storage:
+  disks:
+    - device: /dev/sdb
+      wipe_table: true
+      partitions:
+        - number: 1
+          label: mnt_data
+          resize: true
+          size_mib: 0

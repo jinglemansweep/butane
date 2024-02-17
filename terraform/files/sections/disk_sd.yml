@@ -1,6 +1,0 @@
-variant: flatcar
-version: 1.0.0
-
-storage:
-  disks:
-    - device: /dev/sdb

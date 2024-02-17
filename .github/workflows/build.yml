@@ -34,7 +34,7 @@ jobs:
           
           echo "Getting Terraform JSON outputs..."
           
-          for i in "plex" "swarm_manager" "swarm_worker" "hetzner"; do 
+          for i in "plex" "swarm_manager" "swarm_worker" "hetzner" "hetzner_local"; do 
             echo "  ... ${i}"
             terraform output -raw ${i} > ../.build/${i}.json
             echo "<li><a href=\"${i}.json\">${i}</a></li>" >> ../.build/index.html

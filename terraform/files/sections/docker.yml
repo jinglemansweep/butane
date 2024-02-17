@@ -27,6 +27,8 @@ systemd:
 
 
 passwd:
+  groups:
+    - name: docker
   users:
     - name: louis
-      groups: [docker"]
+      groups: ["docker"]

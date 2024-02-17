@@ -24,11 +24,3 @@ systemd:
   units:
     - name: docker.service
       enabled: true
-
-
-passwd:
-  groups:
-    - name: docker
-  users:
-    - name: louis
-      groups: ["docker"]

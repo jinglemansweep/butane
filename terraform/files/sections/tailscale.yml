@@ -5,7 +5,7 @@ version: 1.0.0
 storage:
   files:
     - path: /opt/tailscale-install.sh
-      mode: 0644
+      mode: 0755
       contents:
         inline: |
           #!/usr/bin/env bash

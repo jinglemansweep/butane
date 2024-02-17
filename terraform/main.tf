@@ -53,5 +53,6 @@ data "ct_config" "hetzner_local" {
   snippets = [
     file("files/sections/fs.yml"),
     file("files/sections/base_docker.yml"),
+    file("files/sections/tailscale.yml"),
   ]
 }

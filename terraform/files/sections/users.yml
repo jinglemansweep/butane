@@ -2,8 +2,6 @@ variant: flatcar
 version: 1.0.0
 
 passwd:
-  groups:
-    - name: docker
   users:
     - name: user
       ssh_authorized_keys:

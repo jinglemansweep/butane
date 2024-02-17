@@ -5,9 +5,7 @@ data "ct_config" "swarm_manager" {
 
   snippets = [
     file("files/sections/fs.yml"),
-    # Sections
-    file("files/sections/users.yml"),
-    file("files/sections/docker.yml"),
+    file("files/sections/base_docker.yml"),
     file("files/sections/nfs.yml")
   ]
 }
@@ -19,9 +17,7 @@ data "ct_config" "swarm_worker" {
 
   snippets = [
     file("files/sections/fs.yml"),
-    # Sections
-    file("files/sections/users.yml"),
-    file("files/sections/docker.yml"),
+    file("files/sections/base_docker.yml"),
     file("files/sections/nfs.yml")
   ]
 }
@@ -33,9 +29,7 @@ data "ct_config" "plex" {
 
   snippets = [
     file("files/sections/fs.yml"),
-    # Sections
-    file("files/sections/users.yml"),
-    file("files/sections/docker.yml"),
+    file("files/sections/base_docker.yml"),
     file("files/sections/nfs.yml")
   ]
 }
@@ -47,9 +41,7 @@ data "ct_config" "hetzner" {
 
   snippets = [
     file("files/sections/fs.yml"),
-    # Sectionss
-    file("files/sections/users.yml"),
-    file("files/sections/docker.yml"),
+    file("files/sections/base_docker.yml"),
   ]
 }
 
@@ -60,8 +52,6 @@ data "ct_config" "hetzner_local" {
 
   snippets = [
     file("files/sections/fs.yml"),
-    # Sectionss
-    file("files/sections/users.yml"),
-    file("files/sections/docker.yml"),
+    file("files/sections/base_docker.yml"),
   ]
 }

@@ -11,10 +11,12 @@ storage:
           #!/usr/bin/env bash
           set -e
           
+          TAILSCALE_VERSION="1.60.0"
+
           # Only re-download if not already existing
           if ! test -e /etc/tailscale; then
           echo "Downloading tailscale"
-          wget https://pkgs.tailscale.com/stable/tailscale_1.60.0_amd64.tgz -O tailscale_dist.tgz
+          wget https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE_VERSION}_amd64.tgz -O tailscale_dist.tgz
           
           echo "Unpacking tailscale"
           tar xvf tailscale_dist.tgz -C /tmp
@@ -24,17 +26,17 @@ storage:
           
           echo "Moving binaries (if not exist)"
           sudo mkdir -p /etc/tailscale
-          sudo cp -n /tmp/tailscale_1.60.0_amd64/tailscale /etc/tailscale/tailscale
-          sudo cp -n /tmp/tailscale_1.60.0_amd64/tailscaled /etc/tailscale/tailscaled
+          sudo cp -n /tmp/tailscale_${TAILSCALE_VERSION}_amd64/tailscale /etc/tailscale/tailscale
+          sudo cp -n /tmp/tailscale_${TAILSCALE_VERSION}_amd64/tailscaled /etc/tailscale/tailscaled
           
           echo "Enabling service"
           sudo systemctl enable tailscaled.service
           
           echo "Reloading systemd"
-          systemctl daemon-reload
+          sudo systemctl daemon-reload
           
           echo "Cleaning up tmp folder"
-          rm -r /tmp/tailscale_1.34.1_amd64
+          rm -r /tmp/tailscale_${TAILSCALE_VERSION}_amd64
           fi
           
           echo "Starting service"
@@ -69,6 +71,7 @@ systemd:
         ExecStart=/usr/bin/sh -c "/opt/tailscale-install.sh"
         [Install]
         WantedBy=multi-user.target
+
     - name: tailscaled.service
       enabled: true
       contents: |

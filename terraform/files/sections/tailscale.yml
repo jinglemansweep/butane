@@ -56,7 +56,7 @@ systemd:
       enabled: true
       contents: |
         [Unit]
-        Description=Run Tailscale installation script
+        Description=Run Tailscale Install
         Wants = network-online.target
         After = network.target network-online.target
         ConditionPathExists=/opt/tailscale-install.sh
@@ -74,7 +74,7 @@ systemd:
       enabled: true
       contents: |
         [Unit]
-        Description=Tailscale node agent
+        Description=Tailscale Agent
         Documentation=https://tailscale.com/kb/
         Wants=network-pre.target tailscale-install.service
         After=network-pre.target NetworkManager.service systemd-resolved.service

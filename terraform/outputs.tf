@@ -13,3 +13,7 @@ output "plex" {
 output "hetzner" {
   value = data.ct_config.hetzner.rendered
 }
+
+output "hetzner_local" {
+  value = data.ct_config.hetzner_local.rendered
+}

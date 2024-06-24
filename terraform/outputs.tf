@@ -10,10 +10,6 @@ output "plex" {
   value = data.ct_config.plex.rendered
 }
 
-output "hetzner" {
-  value = data.ct_config.hetzner.rendered
-}
-
-output "hetzner_local" {
-  value = data.ct_config.hetzner_local.rendered
+output "k3s" {
+  value = data.ct_config.k3s.rendered
 }

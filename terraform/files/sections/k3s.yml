@@ -1,0 +1,35 @@
+
+variant: flatcar
+version: 1.0.0
+
+storage:
+  files:
+    - path: /opt/k3s-install.sh
+      mode: 0755
+      contents:
+        inline: |
+          #!/usr/bin/env bash
+          set -e
+          curl -sfL https://get.k3s.io | sh -
+
+systemd:
+  units:
+
+    - name: k3s-install.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Run K3S Install
+        Wants = network-online.target
+        After = network.target network-online.target
+        ConditionPathExists=/opt/k3s-install.sh
+        # ConditionPathExists=!/etc/kube
+        [Service]
+        Type=forking
+        TimeoutStartSec=180
+        RemainAfterExit=yes
+        KillMode=process
+        ExecStartPre=/bin/sleep 30
+        ExecStart=/usr/bin/sh -c "/opt/k3s-install.sh"
+        [Install]
+        WantedBy=multi-user.target

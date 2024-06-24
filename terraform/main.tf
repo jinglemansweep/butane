@@ -34,26 +34,14 @@ data "ct_config" "plex" {
   ]
 }
 
-data "ct_config" "hetzner" {
-  content      = file("files/sections/disk_hetzner.yml")
-  strict       = true
-  pretty_print = false
-
-  snippets = [
-    file("files/sections/fs.yml"),
-    file("files/sections/base_docker.yml"),
-    file("files/sections/tailscale.yml"),
-  ]
-}
-
-data "ct_config" "hetzner_local" {
+data "ct_config" "k3s" {
   content      = file("files/sections/disk_vm.yml")
   strict       = true
   pretty_print = false
 
   snippets = [
     file("files/sections/fs.yml"),
-    file("files/sections/base_docker.yml"),
-    file("files/sections/tailscale.yml"),
+    file("files/sections/base_user.yml"),
+    file("files/sections/k3s.yml")
   ]
 }
